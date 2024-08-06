@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
-app.use("/users", usersRoutes);
+app.use("/api/users", usersRoutes);
 
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
