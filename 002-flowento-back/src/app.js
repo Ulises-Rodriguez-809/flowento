@@ -16,35 +16,38 @@ const PORT = options.PORT || 8080;
 // inicializamos express
 const app = express();
 
-// const whiteList = ['http://localhost:5173', 'http://flowento.vercel.app/', 'https://flowento.vercel.app/'];
+const whitelist = [
+    "http://localhost:5173",
+    "https://c19-24-m-react.onrender.com",
+    "http://localhost:8080", 
+    "https://c19-24-m-node.onrender.com",/** other domains if any */,
+];
+const corsOptions = {
+    credentials: true,
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+};
 
-// const optionsCors = {
-//     origin : function (origin,callback){
-//         if (whiteList.indexOf(origin) !== -1 || !origin) {
-//             callback(null,true);
-//         }
-//         else{
-//             callback(new Error("No se pudo"))
-//         }
+app.use(cors(corsOptions));
+
+
+// app.use(function (req, res, next) {
+//     // res.header("Access-Control-Allow-Origin", "*");
+//     const allowedOrigins = ['http://localhost:5173', 'http://flowento.vercel.app/', 'https://flowento.vercel.app/'];
+//     const origin = req.headers.origin;
+//     if (allowedOrigins.includes(origin)) {
+//         res.setHeader('Access-Control-Allow-Origin', origin);
 //     }
-// }
-
-
-// app.use(cors(optionsCors))
-
-
-app.use(function (req, res, next) {
-    // res.header("Access-Control-Allow-Origin", "*");
-    const allowedOrigins = ['http://localhost:5173', 'http://flowento.vercel.app/', 'https://flowento.vercel.app/'];
-    const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-    }
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    res.header("Access-Control-Allow-credentials", true);
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
-    next();
-});
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+//     res.header("Access-Control-Allow-credentials", true);
+//     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
+//     next();
+// });
 
 app.use(express.static(__dirname + "/public"));
 

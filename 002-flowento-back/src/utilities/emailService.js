@@ -1,12 +1,12 @@
 import nodemailer from "nodemailer";
-// import { options } from "./config.js";
+import { options } from "../config/config.js";
 
 // flowentoNodemailer
-// adnv uisq hptw mmbu
+// lvmmuavqxkgcjsgn
 
 //credenciales
-const adminEmail = process.env.EMAIL_NODEMAILER || "flowentoa@gmail.com";
-const adminPass = process.env.EMAIL_PASSWORD || "adnvuisqhptwmmbu";
+const adminEmail = options.EMAIL_NODEMAILER || "flowentoa@gmail.com";
+const adminPass = options.EMAIL_NODEMAILER_PASSWORD || "lvmmuavqxkgcjsgn";
 
 //configurar el canal de comunicacion entre node y gmail
 const transporter = nodemailer.createTransport({
@@ -24,7 +24,6 @@ const transporter = nodemailer.createTransport({
 
 export const emailSender = async (email, template, subject = "Atencion al cliente") => {
     try {
-
         const contenido = await transporter.sendMail({
             //Estructura del correo
             from: "Flowento",

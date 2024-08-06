@@ -2,7 +2,7 @@
 CREATE TYPE "Type" AS ENUM ('online', 'in_person');
 
 -- CreateEnum
-CREATE TYPE "State" AS ENUM ('pending', 'fulfilled', 'rejected');
+CREATE TYPE "State" AS ENUM ('pending', 'approve', 'rejected');
 
 -- CreateEnum
 CREATE TYPE "Attendance_confirmed" AS ENUM ('yes', 'no');
@@ -10,11 +10,15 @@ CREATE TYPE "Attendance_confirmed" AS ENUM ('yes', 'no');
 -- CreateTable
 CREATE TABLE "User" (
     "id_user" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
+    "image" TEXT NOT NULL DEFAULT 'imagen sin definir',
+    "first_name" TEXT NOT NULL DEFAULT 'sin especificar',
+    "last_name" TEXT NOT NULL DEFAULT 'sin especificar',
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "phone" TEXT NOT NULL,
-    "gender" TEXT NOT NULL,
+    "phone" TEXT NOT NULL DEFAULT '5555-555555',
+    "gender" TEXT NOT NULL DEFAULT 'no definido',
+    "country" TEXT NOT NULL DEFAULT 'no definido',
+    "birthDate" TEXT NOT NULL DEFAULT '2024-01-01',
     "registration_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id_user")
@@ -37,13 +41,17 @@ CREATE TABLE "Event" (
     "userId" INTEGER NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "start_date" TIMESTAMP(3) NOT NULL,
-    "end_date" TIMESTAMP(3) NOT NULL,
+    "image" TEXT NOT NULL DEFAULT 'sin especificar',
+    "start_date" TEXT NOT NULL,
+    "end_date" TEXT NOT NULL,
     "max_capacity" INTEGER NOT NULL,
     "current_capacity" INTEGER NOT NULL,
+    "price" INTEGER NOT NULL DEFAULT 0,
+    "hour" TEXT NOT NULL DEFAULT '11:30',
+    "location" TEXT NOT NULL DEFAULT 'sin especificar de momento',
     "type" "Type" NOT NULL,
     "online_link" BOOLEAN NOT NULL,
-    "state" "State" NOT NULL,
+    "state" "State" NOT NULL DEFAULT 'pending',
     "creation_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Event_pkey" PRIMARY KEY ("id_event")
@@ -54,7 +62,7 @@ CREATE TABLE "Inscription" (
     "id_registration" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
     "eventId" INTEGER NOT NULL,
-    "attendance_confirmed" "Attendance_confirmed" NOT NULL,
+    "attendance_confirmed" "Attendance_confirmed" NOT NULL DEFAULT 'no',
     "registration_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Inscription_pkey" PRIMARY KEY ("id_registration")
@@ -67,7 +75,7 @@ CREATE TABLE "Feedback" (
     "eventId" INTEGER NOT NULL,
     "comment" TEXT NOT NULL,
     "rating" INTEGER NOT NULL,
-    "feedback_date" TIMESTAMP(3) NOT NULL,
+    "feedback_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Feedback_pkey" PRIMARY KEY ("id_feedback")
 );
@@ -130,9 +138,6 @@ CREATE TABLE "Reserve" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
-
--- CreateIndex
-CREATE UNIQUE INDEX "User_phone_key" ON "User"("phone");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "QR_code_key" ON "QR"("code");

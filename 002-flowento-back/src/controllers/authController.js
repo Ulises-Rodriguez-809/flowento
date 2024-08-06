@@ -129,7 +129,7 @@ class AuthController {
             //creamos el usuario y lo guardamos en la DB
             const newUser = await createUser(user);
 
-            const response = await emailSender(email, "Te incirbiste con exito al evento", "Registro al evento");
+            const response = await emailSender(email, "Te incirbiste con exito al evento", "Te registraste con exito");
 
             res.send({
                 status: "success",

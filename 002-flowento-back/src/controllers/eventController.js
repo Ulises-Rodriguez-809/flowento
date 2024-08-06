@@ -56,8 +56,8 @@ class Event {
 
             // const { id, email } = decodedInfo;
 
-            const id = 7;
-            const email = "uliisesrodriguez809@gmail.com";
+            const id = 1;
+            const email = "ulirodriguez5@gmail.com";
 
             //esto xq la fecha la estoy pasando como string en formato yyyy-mm-dd
             const regExDate = /^\d{4}-\d{2}-\d{2}$/;
