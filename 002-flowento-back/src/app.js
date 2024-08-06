@@ -20,7 +20,7 @@ const whitelist = [
     "http://localhost:5173",
     "https://c19-24-m-react.onrender.com",
     "http://localhost:8080", 
-    "https://c19-24-m-node.onrender.com",/** other domains if any */,
+    "https://flowento-back.vercel.app/",/** other domains if any */,
 ];
 const corsOptions = {
     credentials: true,
@@ -57,14 +57,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(options.COOKIE_PARSER_WORD, {}));
 
 // rutas:
-app.get("/api",(req,res)=>{
+app.get("/",(req,res)=>{
     res.send("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 })
-app.use("/api/auth", authRoutes);
-app.use("/api/users", usersRoutes);
-app.use("/api/admin", adminRoutes);
-app.use("/api/events", evnetRoutes);
-app.use("/api/qr", qrRoutes);
+app.use("/auth", authRoutes);
+app.use("/users", usersRoutes);
+app.use("/admin", adminRoutes);
+app.use("/events", evnetRoutes);
+app.use("/qr", qrRoutes);
 
 
 // const server = app.listen(PORT, () => {
