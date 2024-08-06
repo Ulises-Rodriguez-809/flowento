@@ -1,13 +1,13 @@
 import express from 'express';
-import { options } from './src/config/config.js'
+import { options } from './config/config.js'
 import cors from 'cors';
-import __dirname from './src/utils.js';
+import __dirname from './utils.js';
 import cookieParser from 'cookie-parser';
-import authRoutes from './src/routes/authRoutes.js';
-import usersRoutes from './src/routes/userRoutes.js';
-import adminRoutes from './src/routes/adminRoutes.js';
-import evnetRoutes from './src/routes/eventRoutes.js';
-import qrRoutes from './src/routes/qrRoutes.js';
+import authRoutes from './routes/authRoutes.js';
+import usersRoutes from './routes/userRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
+import evnetRoutes from './routes/eventRoutes.js';
+import qrRoutes from './routes/qrRoutes.js';
 
 // indicamos en el puerto que queremos q corra el server (puede ser cualquier numero q no este ocupad)
 const PORT = options.PORT || 8080;
@@ -55,12 +55,15 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser(options.COOKIE_PARSER_WORD, {}));
 
-// rutas:s
-app.use("/auth", authRoutes);
-app.use("/users", usersRoutes);
-app.use("/admin", adminRoutes);
-app.use("/events", evnetRoutes);
-app.use("/qr", qrRoutes);
+// rutas:
+app.get("/asd",(req,res)=>{
+    res.send("hola")
+})
+// app.use("/auth", authRoutes);
+// app.use("/users", usersRoutes);
+// app.use("/admin", adminRoutes);
+// app.use("/events", evnetRoutes);
+// app.use("/qr", qrRoutes);
 
 
 const server = app.listen(PORT, () => {
