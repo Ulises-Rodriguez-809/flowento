@@ -16,6 +16,11 @@ const PORT = options.PORT || 8080;
 // inicializamos express
 const app = express();
 
+app.get("/",(req,res)=>{
+    res.send("hola")
+})
+
+
 const whitelist = [
     "http://localhost:5173",
     "https://c19-24-m-react.onrender.com",
