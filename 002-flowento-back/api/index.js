@@ -1,16 +1,8 @@
-import express from "express";
-import usersRoutes from '../src/routes/userRoutes.js';
+import http from 'http';
+import app from '../src/app.js';
 
-const app = express();
+const server = http.createServer(app);
 
-app.use(express.static(__dirname + "/public"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.get("/", (req, res) => res.send("Express on Vercel"));
-app.use("/api/users", usersRoutes);
-
-
-app.listen(3000, () => console.log("Server ready on port 3000."));
-
-export default app;
+server.listen(8080,()=>{
+    console.log(`Escuchando el puerto ${8080}, iniciando express en http://localhost:${8080}/`);
+})

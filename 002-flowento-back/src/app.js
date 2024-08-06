@@ -8,7 +8,6 @@ import usersRoutes from './routes/userRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import evnetRoutes from './routes/eventRoutes.js';
 import qrRoutes from './routes/qrRoutes.js';
-import { initWebSockets, serverCallback } from './server.js';
 
 // indicamos en el puerto que queremos q corra el server (puede ser cualquier numero q no este ocupad)
 const PORT = options.PORT || 8080;
@@ -64,12 +63,8 @@ app.use("/events", evnetRoutes);
 app.use("/qr", qrRoutes);
 
 
-// const server = app.listen(PORT, () => {
-//     console.log(`Escuchando el puerto ${PORT}, iniciando express en http://localhost:${PORT}/`);
-// });
-
-const server = app.listen(PORT, serverCallback);
-
-initWebSockets(server);
+const server = app.listen(PORT, () => {
+    console.log(`Escuchando el puerto ${PORT}, iniciando express en http://localhost:${PORT}/`);
+});
 
 export default app;
