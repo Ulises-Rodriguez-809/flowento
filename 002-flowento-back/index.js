@@ -55,7 +55,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser(options.COOKIE_PARSER_WORD, {}));
 
-// rutas:
+// rutas:s
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/admin", adminRoutes);
