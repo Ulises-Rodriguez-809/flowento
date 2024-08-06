@@ -81,3 +81,5 @@ app.use("/qr", qrRoutes);
 const server = app.listen(PORT, serverCallback);
 
 initWebSockets(server);
+
+export default app;
