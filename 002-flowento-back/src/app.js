@@ -59,11 +59,11 @@ app.use(cookieParser(options.COOKIE_PARSER_WORD, {}));
 app.get("/asd",(req,res)=>{
     res.send("hola")
 })
-// app.use("/auth", authRoutes);
-// app.use("/users", usersRoutes);
-// app.use("/admin", adminRoutes);
-// app.use("/events", evnetRoutes);
-// app.use("/qr", qrRoutes);
+app.use("/auth", authRoutes);
+app.use("/users", usersRoutes);
+app.use("/admin", adminRoutes);
+app.use("/events", evnetRoutes);
+app.use("/qr", qrRoutes);
 
 
 const server = app.listen(PORT, () => {
